@@ -13,15 +13,20 @@ gamma = 0.99  # discount factor
 epsilon = 0.1  # 10% steps are random
 num_episodes = 100_000
 
-# Обучение
-env = TicTacToeBoard()
-
+# Learning
 state_cnt = pow(3, 9)  # 3 positions (X, O, empty) for 9 cells
 action_cnt = 9
 Q = np.zeros((state_cnt, action_cnt))
 
 player = 1
+env = TicTacToeBoard()
 for i in range(num_episodes):
+    if i % 100_000 == 0:
+        print('\nLearning', end='')
+        if i > 0:
+            print(f' ({i:,} episodes done)', end='')
+    elif i % 10_000 == 0:
+        print('.', end='')
     state = env.reset()
     done = False
     while not done:
@@ -49,15 +54,21 @@ for i in range(num_episodes):
 
 time_spent_s = (time.time_ns() - start_time_ns) / 1_000_000_000
 
-print("Q-table:")
-print("State, Action 1, Action 2, Action 3, Action 4, Action 5, Action 6, Action 7, Action 8, Action 9")
+# Write to file
+print()
+print("Writing to 'q-table.csv'")
 cnt = 0
-for state in range(0, state_cnt):
-    if sum(Q[state]) != 0:
-        cnt += 1
-        print("\n" + TicTacToeBoard.state_name(state), end="")
-        for q in Q[state]:
-            print(", " + f"{q:+.6f}", end="")
-print("\n")
-print("Total states: " + str(cnt))
-print("Spent time: " + f"{time_spent_s:.3f} s")
+with open('q-table.csv', 'w', newline='') as file:
+    file.write(
+        'State,      Action 1,  Action 2,  Action 3,  Action 4,  Action 5,  Action 6,  Action 7,  Action 8,  Action 9')
+    for state in range(0, state_cnt):
+        if sum(Q[state]) != 0:
+            cnt += 1
+            file.write('\n')
+            file.write(TicTacToeBoard.state_name(state))
+            for q in Q[state]:
+                file.write(', ')
+                file.write(f'{q:+.6f}')
+
+print('Total states: ' + str(cnt))
+print('Spent time: ' + f'{time_spent_s:.3f} s')
