@@ -18,7 +18,6 @@ state_cnt = pow(3, 9)  # 3 positions (X, O, empty) for 9 cells
 action_cnt = 9
 Q = np.zeros((state_cnt, action_cnt))
 
-player = 1
 env = TicTacToeBoard()
 for i in range(num_episodes):
     if i % 100_000 == 0:
@@ -28,6 +27,7 @@ for i in range(num_episodes):
     elif i % 10_000 == 0:
         print('.', end='')
     state = env.reset()
+    player = 1
     done = False
     while not done:
         actions = env.allowed_actions()
