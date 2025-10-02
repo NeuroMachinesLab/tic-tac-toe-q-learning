@@ -1,6 +1,6 @@
 # Q-Learning for Tic Tac Toe Game
 
-To generate csv Q-table for Tic Tac Toe Game run
+To generate Q-table in csv format for Tic Tac Toe Game run:
 ```python
 pip install -r requirements.txt
 python q_learn.py

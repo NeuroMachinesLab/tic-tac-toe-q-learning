@@ -38,7 +38,7 @@ for i in range(num_episodes):
             action = actions[i]
         else:
             # action with max Q-value
-            action = actions[0]
+            action = actions[np.random.randint(0, len(actions))]  # if all actions have same value select random
             max_q = Q[state][action]
             for i in actions:
                 q = Q[state][i]
