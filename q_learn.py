@@ -9,7 +9,7 @@ start_time_ns = time.time_ns()
 
 # Learning parameters
 alpha = 0.1  # learning rage
-gamma = 0.99  # discount factor
+gamma = 0.99 # discount factor
 epsilon = 0.1  # 10% steps are random
 num_episodes = 100_000
 
@@ -19,13 +19,8 @@ action_cnt = 9
 Q = np.zeros((state_cnt, action_cnt))
 
 env = TicTacToeBoard()
-for i in range(num_episodes):
-    if i % 100_000 == 0:
-        print('\nLearning', end='')
-        if i > 0:
-            print(f' ({i:,} episodes done)', end='')
-    elif i % 10_000 == 0:
-        print('.', end='')
+for episode in range(num_episodes):
+    if episode % 100_000 == 0: print(f'Learning ({episode:,} episodes done)')
     state = env.reset()
     player = 1
     done = False
@@ -53,6 +48,7 @@ for i in range(num_episodes):
         player = 2 if player == 1 else 1
 
 time_spent_s = (time.time_ns() - start_time_ns) / 1_000_000_000
+print(f'Learning ({num_episodes:,} episodes done)')
 
 # Write to file
 print()

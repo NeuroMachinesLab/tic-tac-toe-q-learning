@@ -12,9 +12,14 @@ class TicTacToeBoard:
         [0, 4, 8],  # 1-st diagonal
         [2, 4, 6],  # 2-nd diagonal
     ]
+    penalty = -1
+    reward = 1  # should be greater than penalty, don't use 0, this value in q-table used for unresolved move
+
+    def __init__(self):
+        self.board = np.zeros(9, dtype=int)
 
     def reset(self):
-        self.board = np.zeros(9).astype(int)  # 3x3 board values: 0 - for empty, 1 - for 'X', '2' - for 'O'
+        self.board = np.zeros(9, dtype=int)  # 3x3 board values: 0 - for empty, 1 - for 'X', '2' - for 'O'
         return self.state()
 
     def state(self):
@@ -53,7 +58,7 @@ class TicTacToeBoard:
         """
         self.board[action] = player
         winner = self.who_wins()
-        reward = 0 if winner == player else -1
+        reward = TicTacToeBoard.reward if winner == player else TicTacToeBoard.penalty
         done = winner != 0
         return self.state(), reward, done
 
