@@ -8,7 +8,7 @@ from tic_tac_toe_board import TicTacToeBoard as board
 start_time_ns = time.time_ns()
 
 # Learning parameters
-num_episodes = 100_0000
+num_episodes = 1_000_000
 epsilon = 1.0  # 0 - the world is not studied, 1 - studying moves (each action receives equal chances for estimation)
 #avg_num_episodes_per_state = float(num_episodes) / board.state_cnt
 #alpha = 1.0 / avg_num_episodes_per_state  # learning rage (use 1/N value, where each state episode makes an equal contribution)
