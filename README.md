@@ -7,7 +7,7 @@ pip install - r requirements.txt
 python q_learn.py
 ```
 
-Output example:
+Q-table output example:
 
 | State       | A1 | A2   | A3   | A4   | A5   | A6 | A7 | A8 | A9   |
 |-------------|----|------|------|------|------|----|----|----|------|
@@ -16,10 +16,19 @@ Output example:
 
 where:<br>
 `State` - state on the 3x3 board, describes by 9 chars string, where 'b' for empty cell, 'x' and 'o';<br>
-`A1`, ..., `A9` - agent rewards for step to cell 1-9 for current `State`.
+`A1`, ..., `A9` - agent rewards for move to cell 1-9 for current `State`, higher value - the action is preferable.
+
+The actions on gameboard are:
+```
+| 1 | 2 | 3
+-----------
+| 4 | 5 | 6
+-----------
+| 7 | 8 | 9
+```
 
 2 files are generated for convenience: `q-table-x.csv` and `q-table-o.csv` for X-player and O-player moves.
-They may be joined, because files contains unique states. 
+They may be joined, because files contains unique states.
 
 ## Details
 The core of the algorithm is a Bellman equation:
@@ -34,7 +43,7 @@ where:<br>
 This algorithm is tuned.
 
 #### The more training, the more accurately Q-table.
-Tuned algorithm doesn't use constant `alpha` and `gamma`. They calculated by 
+Tuned algorithm doesn't use constant `alpha` and `gamma`. They calculated by:
 ```
 alpha = gamma = i / N 
 ```
