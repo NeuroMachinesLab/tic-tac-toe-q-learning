@@ -16,13 +16,13 @@ class TicTacToeBoard:
     action_cnt = 9
     state_cnt = pow(3, 9)  # 3 positions (X, O, empty) for 9 cells
     penalty = -1
-    # Don't use lower value. It's negate earlier moves if they can lead to win.
-    # Don't use higher value. This rewards the condition, leading to the opponent's winning position.
-    penalty_for_opponent_pre_winning_state = penalty
     # Should be greater than penalty.
     # Don't use 0, this value in q-table used for unresolved move.
     # The reward should compensate for the entire penalty: (penalty * max_moves_cnt + reward) == 0
     reward = abs(penalty) * action_cnt
+    # Don't use lower value. It's negate earlier moves if they can lead to win.
+    # Don't use higher value. This rewards the condition, leading to the opponent's winning position.
+    # penalty_for_opponent_pre_winning_state = penalty
 
     def __init__(self):
         self.board = np.full(TicTacToeBoard.action_cnt, fill_value=-1, dtype=int)
@@ -66,16 +66,16 @@ class TicTacToeBoard:
         :return: agent reward
         """
         # check is other player wins if moves to this position
-        other_player = 0 if player == 1 else 0
-        self.board[action] = other_player
-        possible_winner = self.who_wins()
+        # other_player = 0 if player == 1 else 0
+        # self.board[action] = other_player
+        # possible_winner = self.who_wins()
         # do action
         self.board[action] = player
         winner = self.who_wins()
         if winner == player:
             reward = TicTacToeBoard.reward
-        elif possible_winner == other_player:
-            reward = TicTacToeBoard.penalty_for_opponent_pre_winning_state
+        # elif possible_winner == other_player:
+        #     reward = TicTacToeBoard.penalty_for_opponent_pre_winning_state
         else:
             reward = TicTacToeBoard.penalty
         done = winner != -1
