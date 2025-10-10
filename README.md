@@ -17,7 +17,8 @@ Q-Learning Table output example:
 | -x- oox -x- | 7.2 | -    | -0.18 | -    | -    | -  | 7.12 | -  | -0.18 |
 
 where:<br>
-`State` - state on the 3x3 board, describes by 9 chars string, where '-' for empty cell, 'x' and 'o';<br>
+`State` - state on the 3x3 board, describes by 9 chars string, where '-' for empty cell, 'x' and 'o';
+          for example, the board state for the image above is 'oxx -ox --o';<br>
 `A1`, ..., `A9` - agent rewards for move to cell 1-9 for current `State`, higher value - the action is preferable.
 
 The actions on gameboard are:
@@ -30,9 +31,8 @@ The actions on gameboard are:
 | 7 | 8 | 9 |
 ```
 
-2 files are generated for convenience: [Q-Learning Table-x.csv](Q-Learning Table-x.csv)
-and [Q-Learning Table-o.csv](Q-Learning Table-o.csv) for X-player and O-player moves.
-They may be joined, because files contains unique states.
+2 files are generated for convenience: [q-table-x.csv](q-table-x.csv) and [q-table-o.csv](q-table-o.csv)
+for X-player and O-player moves. They may be joined, because files contains unique states.
 
 ## Details
 
